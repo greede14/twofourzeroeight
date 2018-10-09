@@ -11,7 +11,7 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
-
+        bool checkOver;
         public TwoZeroFourEightModel() : this(4)
         {
             // default board size is 4 
@@ -135,7 +135,9 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
+                        checkOver = true;
                     }
+                    else checkOver = false;
                 }
                 // shift left again
                 pos = 0;

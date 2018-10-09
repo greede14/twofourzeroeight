@@ -12,11 +12,13 @@ namespace twozerofoureight
         public const int RIGHT = 1;
         public const int UP = 2;
         public const int DOWN = 3;
-
+         
         public TwoZeroFourEightController()
         {
 
         }
+
+        
 
         public override void ActionPerformed(int action)
         {
@@ -24,9 +26,9 @@ namespace twozerofoureight
             {
                 switch (action)
                 {
-                    case LEFT:
+                    case LEFT :
                         m.PerformLeft();
-                        break; 
+                        break;
                     case RIGHT:
                         m.PerformRight();
                         break;
@@ -40,5 +42,6 @@ namespace twozerofoureight
 
             }
         }
+       
     }
 }
