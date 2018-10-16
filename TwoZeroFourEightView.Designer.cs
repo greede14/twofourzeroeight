@@ -49,6 +49,7 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl00
@@ -250,6 +251,7 @@
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(71, 55);
             this.btnLeft.TabIndex = 16;
+            this.btnLeft.TabStop = false;
             this.btnLeft.Text = "<";
             this.btnLeft.UseVisualStyleBackColor = true;
             this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
@@ -261,6 +263,7 @@
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(71, 55);
             this.btnUp.TabIndex = 17;
+            this.btnUp.TabStop = false;
             this.btnUp.Text = "^";
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
@@ -272,6 +275,7 @@
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(71, 55);
             this.btnRight.TabIndex = 18;
+            this.btnRight.TabStop = false;
             this.btnRight.Text = ">";
             this.btnRight.UseVisualStyleBackColor = true;
             this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
@@ -283,6 +287,7 @@
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(71, 55);
             this.btnDown.TabIndex = 19;
+            this.btnDown.TabStop = false;
             this.btnDown.Text = "v";
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
@@ -300,11 +305,24 @@
             this.label1.Visible = false;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(380, 494);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(184, 55);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "0";
+            // 
             // TwoZeroFourEightView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 658);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnRight);
@@ -357,6 +375,7 @@
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

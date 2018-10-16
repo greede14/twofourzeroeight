@@ -9,6 +9,7 @@ namespace twozerofoureight
     class Controller
     {
         protected ArrayList mList;
+        
 
         public Controller()
         {

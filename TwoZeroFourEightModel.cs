@@ -11,12 +11,22 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
-        bool checkOver;
+        public int boardsize = 0;
+        public bool isfull = false;
+        public bool isCandown = false;
+        public bool isCanUp = false;
+        public bool isCanLeft = false;
+        public bool isCanRight = false;
+        public int score = 0;
         public TwoZeroFourEightModel() : this(4)
         {
             // default board size is 4 
         }
 
+        public int GetScore()
+        {
+            return score;
+        }
         public int[,] GetBoard()
         {
             return board;
@@ -27,14 +37,49 @@ namespace twozerofoureight
             boardSize = size;
             board = new int[boardSize, boardSize];
             var range = Enumerable.Range(0, boardSize);
-            foreach(int i in range) {
-                foreach(int j in range) {
-                    board[i,j] = 0;
+            foreach (int i in range)
+            {
+                foreach (int j in range)
+                {
+                    board[i, j] = 0;
                 }
             }
             rand = new Random();
             board = Random(board);
             NotifyAll();
+        }
+
+        private void checkfull()
+        {
+            boardsize = 0;
+            isfull = false;
+
+            for (int i =0;i<4;i++)
+                {
+                    for (int j =0;j<4;j++)
+                    {
+                        if (board[j, i] != 0)
+                        {
+
+                            boardsize++;
+                            if (boardsize >= 16)
+                            {
+                                boardsize = 16;
+                            if (isCanLeft && isCanRight && isCanUp && isCandown)
+                            {
+                                System.Windows.Forms.MessageBox.Show("Game Over");
+                                isfull = true;
+                            }
+                            break;
+                            }
+                            
+                        }
+                    score += board[i, j];
+                    }
+                }
+
+            
+
         }
 
         private int[,] Random(int[,] input)
@@ -43,12 +88,35 @@ namespace twozerofoureight
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
+
+
                 if (board[x, y] == 0)
                 {
                     board[x, y] = 2;
                     break;
                 }
+                else
+                {
+
+                    while (board[x, y] != 0)
+                    {
+                        x = rand.Next(boardSize);
+                        y = rand.Next(boardSize);
+                        if (board[x, y] == 0) break;
+                    }
+                    board[x, y] = 2;
+
+                    break;
+                }
+
+
+
+
+
             }
+
+
+            checkfull();
             return input;
         }
 
@@ -58,6 +126,7 @@ namespace twozerofoureight
             int pos;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
+            isCandown = false;
             Array.Reverse(rangeY);
             foreach (int i in rangeX)
             {
@@ -83,6 +152,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
+                        isCandown = true;
                     }
                 }
                 // shift left again
@@ -109,7 +179,7 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
-
+            isCanUp = false;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
             foreach (int i in range)
             {
@@ -135,9 +205,10 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
-                        checkOver = true;
+                        isCanUp = true;
+                        
                     }
-                    else checkOver = false;
+                    
                 }
                 // shift left again
                 pos = 0;
@@ -163,7 +234,7 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
-
+            isCanRight = false;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
             Array.Reverse(rangeX);
@@ -191,6 +262,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
+                        isCanRight = true;
                     }
                 }
                 // shift left again
@@ -218,6 +290,7 @@ namespace twozerofoureight
             int[] buffer;
             int pos;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
+            isCanLeft = false;
             foreach (int i in range)
             {
                 pos = 0;
@@ -242,6 +315,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
+                        isCanLeft = true;
                     }
                 }
                 // shift left again
@@ -261,6 +335,10 @@ namespace twozerofoureight
             }
             board = Random(board);
             NotifyAll();
+        }
+        public void PerformHide()
+        {
+            
         }
     }
 }
