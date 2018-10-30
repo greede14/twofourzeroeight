@@ -39,12 +39,13 @@ namespace twozerofoureight
                         m.PerformDown();
                         break;
                     case HIDE:
-                        m.PerformHide();
+                       
                         break;
 
                 }
 
             }
         }
+      
     }
 }

@@ -15,6 +15,7 @@ namespace twozerofoureight
         Model model;
         Controller controller;
         TwoZeroFourEightModel a;
+        private Random rnd = new Random();
 
         public TwoZeroFourEightView()
         {
@@ -29,11 +30,23 @@ namespace twozerofoureight
         public void Notify(Model m)
         {
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
+            UpdateScore(m);
+            showGameOver(m);
         }
 
-        private string UpdateScore(Model m)
+        private void showGameOver(Model m)
         {
-            return Convert.ToString(((TwoZeroFourEightModel)m).GetScore());
+            if (((TwoZeroFourEightModel)m).checkGo() == false)
+            {
+                label1.Visible = true;
+                System.Windows.Forms.MessageBox.Show("Game Over");
+            }
+        }
+
+        private void UpdateScore(Model m)
+        {
+            label2.Text = Convert.ToString(((TwoZeroFourEightModel)m).GetScore()); ;
+           // return Convert.ToString(((TwoZeroFourEightModel)m).GetScore());
         }
         private void UpdateTile(Label l, int i)
         {
@@ -105,7 +118,6 @@ namespace twozerofoureight
             UpdateTile(lbl32,board[3, 2]);
             UpdateTile(lbl33,board[3, 3]);
         }
-
         private void btnLeft_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
@@ -129,14 +141,21 @@ namespace twozerofoureight
 
         private void label1_Click(object sender, EventArgs e)
         {
+           // if(controller.ActionPerformed(TwoZeroFourEightController.HIDE)==true)
             label1.Visible = false;
             
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
+           // label2.Text = UpdateScore(m);
             //label2.Text = Convert.ToString(a.GetScore());
-            label2.Text = UpdateScore(a);
+           // label2.Text = UpdateScore(a);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
  }
