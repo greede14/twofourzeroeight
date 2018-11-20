@@ -36,7 +36,7 @@ namespace twozerofoureight
 
         private void showGameOver(Model m)
         {
-            if (((TwoZeroFourEightModel)m).checkGo() == false)
+            if (((TwoZeroFourEightModel)m).Check() == true)
             {
                 label1.Visible = true;
                 System.Windows.Forms.MessageBox.Show("Game Over");
@@ -156,6 +156,30 @@ namespace twozerofoureight
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Right))
+            {
+                btnRight.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Left))
+            {
+                btnLeft.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Up))
+            {
+                btnUp.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Down))
+            {
+                btnDown.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
  }

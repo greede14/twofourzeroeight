@@ -13,10 +13,6 @@ namespace twozerofoureight
         protected Random rand;
         public int boardsize = 0;
         public bool isfull = true;
-        public bool isCandown = true;
-        public bool isCanUp = true;
-        public bool isCanLeft = true;
-        public bool isCanRight = true;
         public int score = 0;
         public TwoZeroFourEightModel() : this(4)
         {
@@ -128,7 +124,6 @@ namespace twozerofoureight
             int pos;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
-            isCandown = true;
             Array.Reverse(rangeY);
             foreach (int i in rangeX)
             {
@@ -154,9 +149,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
-                        isCandown = true;
                     }
-                    else isCandown = false;
                 }
                 // shift left again
                 pos = 3;
@@ -182,7 +175,6 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
-            isCanUp = true;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
             foreach (int i in range)
             {
@@ -208,10 +200,8 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
-                        isCanUp = true;
 
                     }
-                    else isCanUp = false;
                     
                 }
                 // shift left again
@@ -238,7 +228,6 @@ namespace twozerofoureight
         {
             int[] buffer;
             int pos;
-            isCanRight = true;
             int[] rangeX = Enumerable.Range(0, boardSize).ToArray();
             int[] rangeY = Enumerable.Range(0, boardSize).ToArray();
             Array.Reverse(rangeX);
@@ -266,9 +255,9 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
-                        isCanRight = true;
+                        
                     }
-                    else isCanRight = false;
+                    
                 }
                 // shift left again
                 pos = 3;
@@ -295,7 +284,6 @@ namespace twozerofoureight
             int[] buffer;
             int pos;
             int[] range = Enumerable.Range(0, boardSize).ToArray();
-            isCanLeft = true;
             foreach (int i in range)
             {
                 pos = 0;
@@ -320,9 +308,7 @@ namespace twozerofoureight
                     {
                         buffer[j - 1] *= 2;
                         buffer[j] = 0;
-                        isCanLeft = true;
                     }
-                    else isCanLeft = false;
                 }
                 // shift left again
                 pos = 0;
@@ -342,22 +328,37 @@ namespace twozerofoureight
             board = Random(board);
             NotifyAll();
         }
-       
-        public bool checkGo()
+
+        public bool Check()
         {
-
-            if (isCandown == false && isCanUp == false && isCanLeft == false && isCanRight == false)
+            bool a = true;
+            for (int i = 0; i < boardSize - 1; i++)
             {
-                return false;
-
+                for (int j = 0; j < boardSize - 1; j++)
+                {
+                    if (board[i, j] == board[i, j + 1] || board[j, i] == board[j + 1, i]|| board[i,j]==0)
+                        a = false;
+                }
             }
-            else
+            for (int i = 0; i < boardSize; i++)
             {
-                
-                return true;
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board[i, j] == 0)
+                        a = false;
+                }
             }
-
-                
+            for (int i = 0; i < 3; i++)
+            {
+                if (board[i, 3] == board[i + 1, 3] || board[3, i] == board[3, i + 1] )
+                    a = false;
+            }
+            
+            return a;
         }
+
+            
+                
+        
     }
 }
