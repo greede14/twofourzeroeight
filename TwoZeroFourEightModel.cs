@@ -85,6 +85,7 @@ namespace twozerofoureight
 
         private int[,] Random(int[,] input)
         {
+            
             while (true)
             {
                 int x = rand.Next(boardSize);
@@ -104,12 +105,13 @@ namespace twozerofoureight
                         temp++;
                         x = rand.Next(boardSize);
                         y = rand.Next(boardSize);
-                        if (board[x, y] == 0)
+                        if (board[x, y] == 0) // find new position
                         {
                             board[x, y] = 2;
                             break;
                         }
-                        else if (temp >= 16) break;
+                        else if (temp >= 16) break; // force to break
+                        
                     }
                     break;
                 }
